@@ -50,7 +50,7 @@ namespace MsBuildSetVersion
             var outlines = new List<string>();
             foreach (var line in lines)
             {
-                var v = GetVersionStringFromCSharp(line);
+                var v = VersionUtils.GetVersionStringFromCSharp(line);
                 if (v == null)
                 {
                     outlines.Add(line);
@@ -73,40 +73,5 @@ namespace MsBuildSetVersion
 
         }
 
-        private static VersionString GetVersionStringFromCSharp(string input)
-        {
-            var commentIndex = input.IndexOf("//");
-            if (commentIndex != -1)
-            {
-                input = input.Substring(0, commentIndex);
-            }
-            // Version\("(?<Version>(?<Major>\d+)\.(?<Minor>\d+)\.(?:(?:(?<Build>\d+)\.(?<Revision>\*|\d+))|(?<Build>\*|\d+)))"\)
-            string pattern = @"Version\(""(?<Version>(?<Major>\d+)\.(?<Minor>\d+)\.(?:(?:(?<Build>\d+)\.(?<Revision>\*|\d+))|(?<Build>\*|\d+)))""\)";
-            Regex regex = new Regex(pattern);
-            var matches = regex.Matches(input);
-            if (matches.Count == 1)
-            {
-                var match = matches[0];
-                return new VersionString()
-                {
-                    Major = match.Groups["Major"].Value,
-                    Minor = match.Groups["Minor"].Value,
-                    Build = match.Groups["Build"].Value,
-                    Revision = match.Groups["Revision"].Value,
-                    VersionMatch = match.Groups["Version"],
-                };
-            }
-            return null;
-        }
-
-
-        class VersionString
-        {
-            public string Major { get; set; }
-            public string Minor { get; set; }
-            public string Build { get; set; }
-            public string Revision { get; set; }
-            public Group VersionMatch { get; set; }
-        }
     }
 }
