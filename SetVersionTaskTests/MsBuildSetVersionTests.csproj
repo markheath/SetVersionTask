@@ -55,7 +55,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MsBuildSetVersion\MsBuildSetVersion.csproj">
+    <ProjectReference Include="..\SetVersionTask\MsBuildSetVersion.csproj">
       <Project>{1D360F96-BFA1-4F95-A096-FF0C7D501D90}</Project>
       <Name>MsBuildSetVersion</Name>
     </ProjectReference>
