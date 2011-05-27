@@ -3,4 +3,4 @@ syntax: glob
 *.docstates
 bin/
 obj/
-packages/
+[pP]ackages/
