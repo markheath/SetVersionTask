@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using MsBuildSetVersion;
+using SetVersionTask;
 
-namespace MsBuildSetVersionTests
+namespace SetVersionTaskTests
 {
     [TestFixture]
     public class VersionUtilsTests

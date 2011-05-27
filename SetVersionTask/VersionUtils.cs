@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MsBuildSetVersion
+namespace SetVersionTask
 {
     public static class VersionUtils
     {

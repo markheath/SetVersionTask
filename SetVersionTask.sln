@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetVersionTask", "SetVersionTask\MsBuildSetVersion.csproj", "{1D360F96-BFA1-4F95-A096-FF0C7D501D90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetVersionTask", "SetVersionTask\SetVersionTask.csproj", "{1D360F96-BFA1-4F95-A096-FF0C7D501D90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetVersionTaskTests", "SetVersionTaskTests\MsBuildSetVersionTests.csproj", "{45DBC3B5-EFFB-4904-9C7B-D8FC9FB80048}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetVersionTaskTests", "SetVersionTaskTests\SetVersionTaskTests.csproj", "{45DBC3B5-EFFB-4904-9C7B-D8FC9FB80048}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

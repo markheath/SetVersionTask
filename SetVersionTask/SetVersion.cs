@@ -7,7 +7,7 @@ using Microsoft.Build.Framework;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace MsBuildSetVersion
+namespace SetVersionTask
 {
     public class SetVersion : Task
     {
