@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="SetVersion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VersionString.cs" />
+    <Compile Include="VersionUpdateRule.cs" />
     <Compile Include="VersionUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -26,5 +26,12 @@ namespace SetVersionTaskTests
             Assert.AreEqual(version, versionString.VersionMatch.Value, "Version");
         }
 
+        [TestCase("Version(\"11.22.33.44\")")]
+        [TestCase("//[assembly: AssemblyVersion(\"1.2.3.4\")]")]
+        public void ShouldNotMatch(string input)
+        {
+            var versionString = VersionUtils.GetVersionStringFromCSharp(input);
+            Assert.Null(versionString, "Expected no match");
+        }
     }
 }
