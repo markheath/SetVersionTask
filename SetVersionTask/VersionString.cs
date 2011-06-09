@@ -13,6 +13,5 @@ namespace SetVersionTask
         public string Minor { get; set; }
         public string Build { get; set; }
         public string Revision { get; set; }
-        public Group VersionMatch { get; set; }
     }
 }

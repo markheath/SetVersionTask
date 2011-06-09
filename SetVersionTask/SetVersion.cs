@@ -50,7 +50,12 @@ namespace SetVersionTask
             var outlines = new List<string>();
             foreach (var line in lines)
             {
-                var v = VersionUtils.GetVersionStringFromCSharp(line);
+                VersionString v = null;
+                var g = VersionUtils.GetVersionStringFromCSharp(line);
+                if (g != null)
+                {
+                    v = VersionUtils.ParseVersionString(g.Value);
+                }
                 if (v == null)
                 {
                     outlines.Add(line);
@@ -58,7 +63,7 @@ namespace SetVersionTask
                 else
                 {
                     string newVersion = UpdateVersion(v);
-                    outlines.Add(line.Substring(0, v.VersionMatch.Index) + newVersion + line.Substring(v.VersionMatch.Index + v.VersionMatch.Length));
+                    outlines.Add(line.Substring(0, g.Index) + newVersion + line.Substring(g.Index + g.Length));
                 }
             }
         }
