@@ -29,6 +29,11 @@ namespace SetVersionTask
             }
         }
 
+        public string Update(string version)
+        {
+            return Update(new VersionString(version));
+        }
+
         public string Update(VersionString version)
         {
             List<string> inParts = new List<string>() { version.Major, version.Minor, version.Build, version.Revision };

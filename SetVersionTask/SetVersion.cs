@@ -54,7 +54,7 @@ namespace SetVersionTask
                 var g = VersionUtils.GetVersionStringFromCSharp(line);
                 if (g != null)
                 {
-                    v = VersionUtils.ParseVersionString(g.Value);
+                    VersionString.TryParse(g.Value, out v);
                 }
                 if (v == null)
                 {

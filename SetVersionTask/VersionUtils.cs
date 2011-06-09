@@ -31,24 +31,6 @@ namespace SetVersionTask
             return null;
         }
 
-        public static VersionString ParseVersionString(string input)
-        {
-            string pattern = @"^(?<Major>\d+)\.(?<Minor>\d+)\.(?:(?:(?<Build>\d+)\.(?<Revision>\*|\d+))|(?<Build>\*|\d+))$";
-            Regex regex = new Regex(pattern);
-            var matches = regex.Matches(input);
-            VersionString version = null;
-            if (matches.Count == 1)
-            {
-                var match = matches[0];
-                version = new VersionString()
-                {
-                    Major = match.Groups["Major"].Value,
-                    Minor = match.Groups["Minor"].Value,
-                    Build = match.Groups["Build"].Value,
-                    Revision = match.Groups["Revision"].Value,
-                };
-            }
-            return version;           
-        }
+
     }
 }
