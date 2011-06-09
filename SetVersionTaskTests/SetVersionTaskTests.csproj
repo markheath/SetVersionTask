@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="VersionStringTests.cs" />
     <Compile Include="VersionUpdateRuleTests.cs" />
-    <Compile Include="VersionUtilsTests.cs" />
+    <Compile Include="CSharpUpdaterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

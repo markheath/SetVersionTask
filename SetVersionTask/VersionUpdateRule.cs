@@ -68,5 +68,7 @@ namespace SetVersionTask
             }
             return String.Join(".", outParts.ToArray());
         }
+
+
     }
 }

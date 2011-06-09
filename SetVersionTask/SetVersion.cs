@@ -23,7 +23,8 @@ namespace SetVersionTask
             {
                 if (this.FileName.EndsWith(".cs", StringComparison.OrdinalIgnoreCase))
                 {
-                    UpdateCSharp();
+                    var updater = new CSharpUpdater(new VersionUpdateRule(Version));
+                    updater.UpdateFile(FileName);
                 }
                 else if (this.FileName.EndsWith(".nuspec", StringComparison.OrdinalIgnoreCase))
                 {
@@ -42,35 +43,6 @@ namespace SetVersionTask
         {
 
 
-        }
-
-        private void UpdateCSharp()
-        {
-            string[] lines = File.ReadAllLines(FileName);
-            var outlines = new List<string>();
-            foreach (var line in lines)
-            {
-                VersionString v = null;
-                var g = VersionUtils.GetVersionStringFromCSharp(line);
-                if (g != null)
-                {
-                    VersionString.TryParse(g.Value, out v);
-                }
-                if (v == null)
-                {
-                    outlines.Add(line);
-                }
-                else
-                {
-                    string newVersion = UpdateVersion(v);
-                    outlines.Add(line.Substring(0, g.Index) + newVersion + line.Substring(g.Index + g.Length));
-                }
-            }
-        }
-
-        private string UpdateVersion(VersionString v)
-        {
-            throw new NotImplementedException();
         }
 
         private void ValidateArguments()

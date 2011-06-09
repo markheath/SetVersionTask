@@ -41,11 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CSharpUpdater.cs" />
     <Compile Include="SetVersion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VersionString.cs" />
     <Compile Include="VersionUpdateRule.cs" />
-    <Compile Include="VersionUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
