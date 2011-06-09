@@ -65,7 +65,7 @@ namespace SetVersionTask
                     outParts.Add(partRules[index]);
                 }
             }
-            return String.Join(",", outParts.ToArray());
+            return String.Join(".", outParts.ToArray());
         }
     }
 }

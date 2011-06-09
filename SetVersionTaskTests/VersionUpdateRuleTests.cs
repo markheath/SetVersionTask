@@ -37,18 +37,7 @@ namespace SetVersionTaskTests
         {
             var r = new VersionUpdateRule(rule);
             var updated = r.Update(input);
-            try
-            {
-                new VersionUpdateRule(rule);
-            }
-            catch (ArgumentException)
-            {
-                // expected
-            }
-            catch (FormatException)
-            {
-                // also expected
-            }
+            Assert.AreEqual(rule, updated);
         }
 
 
