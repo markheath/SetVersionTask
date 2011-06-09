@@ -24,6 +24,9 @@ namespace SetVersionTaskTests
 
         [TestCase("Version(\"11.22.33.44\")")]
         [TestCase("//[assembly: AssemblyVersion(\"1.2.3.4\")]")]
+        [TestCase("[assembly: AssemblyCheeseVersion(\"11.22.33.44\")]")]
+        [TestCase("[assembly: Version(\"11.22.33.44\")]")]
+        [TestCase("[blah: AssemblyVersion(\"11.22.33.44\")]")]
         public void ShouldNotMatch(string input)
         {
             var versionString = VersionUtils.GetVersionStringFromCSharp(input);

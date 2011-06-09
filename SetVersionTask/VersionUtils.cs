@@ -20,7 +20,6 @@ namespace SetVersionTask
             {
                 input = input.Substring(0, commentIndex);
             }
-            // Version\("(?<Version>(?<Major>\d+)\.(?<Minor>\d+)\.(?:(?:(?<Build>\d+)\.(?<Revision>\*|\d+))|(?<Build>\*|\d+)))"\)
             string pattern = @"^\s*\[assembly: (?:(?:AssemblyFile)|(?:AssemblyInformational)|(?:Assembly))Version\(""(?<Version>[0-9\.\*]+)""\)\]";
             Regex regex = new Regex(pattern);
             var m = regex.Match(input);
@@ -30,7 +29,5 @@ namespace SetVersionTask
             }
             return null;
         }
-
-
     }
 }

@@ -29,6 +29,13 @@ namespace SetVersionTaskTests
             }
         }
 
+        [TestCase("1.2.3.4.5")]
+        [TestCase("......")]
+        [TestCase("1.2.3.4.")]
+        public void RulesMustHaveNoMoreThanFourParts(string rule)
+        {
+            Assert.Throws<ArgumentException>(() => new VersionUpdateRule(rule));
+        }
         
         [TestCase("1.2.3.4", "0.0.0.0")]
         [TestCase("1.2.3.4", "0.0.*")]
@@ -58,16 +65,6 @@ namespace SetVersionTaskTests
             var r = new VersionUpdateRule(rule);
             var updated = r.Update(input);
             Assert.AreEqual(expected, updated);
-        }
-
-
-        [TestCase("1.2.3.4.5")]
-        [TestCase("......")]
-        [TestCase("1.2.3.4.")]
-        public void RulesMustHaveNoMoreThanFourParts(string rule)
-        {
-            Assert.Throws<ArgumentException>(() => new VersionUpdateRule(rule));
-        }
-    
+        }    
     }
 }
