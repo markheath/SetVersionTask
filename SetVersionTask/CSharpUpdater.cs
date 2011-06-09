@@ -9,11 +9,11 @@ namespace SetVersionTask
 {
     public class CSharpUpdater
     {
-        private VersionUpdateRule assemblyVersion;
+        private VersionUpdateRule assemblyVersionUpdateRule;
 
-        public CSharpUpdater(VersionUpdateRule assemblyVersion)
+        public CSharpUpdater(VersionUpdateRule assemblyVersionUpdateRule)
         {
-            this.assemblyVersion = assemblyVersion;
+            this.assemblyVersionUpdateRule = assemblyVersionUpdateRule;
         }
 
         public void UpdateFile(string fileName)
@@ -41,7 +41,7 @@ namespace SetVersionTask
             }
             else
             {
-                string newVersion = assemblyVersion.Update(v);
+                string newVersion = assemblyVersionUpdateRule.Update(v);
                 return line.Substring(0, g.Index) + newVersion + line.Substring(g.Index + g.Length);
             }
         }
