@@ -40,6 +40,26 @@ namespace SetVersionTaskTests
             Assert.AreEqual(rule, updated);
         }
 
+        [TestCase("=.=.=.=", "1.2.3.4", "1.2.3.4")]
+        [TestCase("=.=.=.=", "0.0.*", "0.0.*")]
+        [TestCase("=.=.=", "0.0.0.0", "0.0.0")]
+        public void RulesCanCopyInput(string rule, string input, string expected)
+        {
+            var r = new VersionUpdateRule(rule);
+            var updated = r.Update(input);
+            Assert.AreEqual(expected, updated);
+        }
+
+        [TestCase("+.+.+.+", "1.2.3.4", "2.3.4.5")]
+        [TestCase("=.=.+", "0.0.*", "0.0.1")]
+        [TestCase("=.=.+", "2.3.4.5", "2.3.5")]
+        public void RulesCanIncrement(string rule, string input, string expected)
+        {
+            var r = new VersionUpdateRule(rule);
+            var updated = r.Update(input);
+            Assert.AreEqual(expected, updated);
+        }
+
 
         [TestCase("1.2.3.4.5")]
         [TestCase("......")]

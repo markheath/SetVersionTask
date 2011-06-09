@@ -55,7 +55,8 @@ namespace SetVersionTask
                     {
                         throw new ArgumentException("Can't increment missing value");
                     }
-                    int inNumber = int.Parse(inPart);
+                    int inNumber = 0;
+                    int.TryParse(inPart, out inNumber); // * gets turned into a zero
                     inNumber++;
                     outParts.Add(inNumber.ToString());
                 }
