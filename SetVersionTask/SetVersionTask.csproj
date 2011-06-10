@@ -52,16 +52,12 @@
     <SetVersionPath>..\Tools\</SetVersionPath>
   </PropertyGroup>
   <UsingTask TaskName="SetVersion" AssemblyFile="$(SetVersionPath)SetVersionTask.dll" />
-  <Target Name="UpdateVersionNumber" Condition="Exists('$(SetVersionPath)SetVersionTask.dll')">
+  <Target Name="UpdateVersionNumber" Condition="Exists('$(SetVersionPath)SetVersionTask.dll') AND '$(Configuration)' == 'Release'">
     <Message Text="Updating Version..." />
-    <SetVersion FileName="Properties\AssemblyInfo.cs" Version="=.=.+.=" Condition="'$(Configuration)' == 'Release'"/>
+    <SetVersion FileName="Properties\AssemblyInfo.cs" AssemblyVersion="=.=.+.=" AssemblyFileVersion="=.=.+.=" />
   </Target>
   <Target Name="BeforeBuild" DependsOnTargets="UpdateVersionNumber">
   
-  </Target>
-  <Target Name="UpdateTools">
-    <!-- need to do a release build first, but can't include that here because MSBuild will be referencing the target DLL -->
-    <Copy SourceFiles="bin\Release\SetVersionTask.dll" DestinationFolder="$(SetVersionPath)" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

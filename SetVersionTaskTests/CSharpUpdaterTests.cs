@@ -32,5 +32,14 @@ namespace SetVersionTaskTests
             var versionString = CSharpUpdater.GetVersionString(input, "AssemblyVersion");
             Assert.Null(versionString, "Expected no match");
         }
+
+        [TestCase("[assembly: AssemblyVersion(\"1.2.3.4\")]", "=.=.+.=", "AssemblyVersion", "[assembly: AssemblyVersion(\"1.2.4.4\")]")]
+        [TestCase("[assembly: AssemblyFileVersion(\"1.2.3.4\")]", "+.5.+.7", "AssemblyFileVersion", "[assembly: AssemblyFileVersion(\"2.5.4.7\")]")]
+        public void CanUpdateRuleWithString(string inLine, string rule, string attributeName, string outLine)
+        {
+            string line = inLine;
+            CSharpUpdater.UpdateLineWithRule(ref line, new CSharpVersionUpdateRule(attributeName, rule));
+            Assert.AreEqual(outLine, line);
+        }
     }
 }

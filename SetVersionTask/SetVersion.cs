@@ -14,8 +14,8 @@ namespace SetVersionTask
         [Required]
         public string FileName { get; set; }
 
-        [Required]
-        public string Version { get; set; }
+        public string AssemblyVersion { get; set; }
+        public string AssemblyFileVersion { get; set; }
 
         public override bool Execute()
         {
@@ -23,7 +23,7 @@ namespace SetVersionTask
             {
                 if (this.FileName.EndsWith(".cs", StringComparison.OrdinalIgnoreCase))
                 {
-                    var updater = new CSharpUpdater(new VersionUpdateRule(Version));
+                    var updater = new CSharpUpdater(AssemblyVersion, AssemblyFileVersion);
                     updater.UpdateFile(FileName);
                 }
                 else if (this.FileName.EndsWith(".nuspec", StringComparison.OrdinalIgnoreCase))

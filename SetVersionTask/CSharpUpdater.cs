@@ -7,13 +7,34 @@ using System.Text.RegularExpressions;
 
 namespace SetVersionTask
 {
+    public class CSharpVersionUpdateRule
+    {
+        private VersionUpdateRule updateRule;
+        public CSharpVersionUpdateRule(string attributeName, string updateRule)
+        {
+            this.AttributeName = attributeName;
+            this.updateRule = new VersionUpdateRule(updateRule);
+        }
+        public string AttributeName { get; private set; }
+        public string Update(VersionString v) { return this.updateRule.Update(v); }
+    }
+
     public class CSharpUpdater
     {
-        private VersionUpdateRule assemblyVersionUpdateRule;
+        private List<CSharpVersionUpdateRule> updateRules;
 
-        public CSharpUpdater(VersionUpdateRule assemblyVersionUpdateRule)
+        public CSharpUpdater(string newAssemblyVersion, string newAssemblyFileVersion = null)
         {
-            this.assemblyVersionUpdateRule = assemblyVersionUpdateRule;
+            this.updateRules = new List<CSharpVersionUpdateRule>();
+            if (!String.IsNullOrEmpty(newAssemblyVersion))
+            {
+                this.updateRules.Add(new CSharpVersionUpdateRule("AssemblyVersion", newAssemblyVersion));
+            }
+            if (!String.IsNullOrEmpty(newAssemblyFileVersion))
+            {
+                this.updateRules.Add(new CSharpVersionUpdateRule("AssemblyFileVersion", newAssemblyFileVersion));
+            }
+            // n.b. there is also AssemblyInformationalVersion
         }
 
         public void UpdateFile(string fileName)
@@ -29,26 +50,34 @@ namespace SetVersionTask
 
         private string UpdateLine(string line)
         {
+            foreach (var rule in updateRules)
+            {
+                if (UpdateLineWithRule(ref line, rule))
+                {
+                    break;
+                }
+            }
+            return line;
+        }
+
+        public static bool UpdateLineWithRule(ref string line, CSharpVersionUpdateRule rule)
+        {
             VersionString v = null;
-            var g = GetVersionString(line, "AssemblyVersion");
+            bool updated = false;
+            var g = GetVersionString(line, rule.AttributeName);
             if (g != null)
             {
                 VersionString.TryParse(g.Value, out v);
             }
-            if (v == null)
+            if (v != null)
             {
-                return line;
+                string newVersion = rule.Update(v);
+                line = line.Substring(0, g.Index) + newVersion + line.Substring(g.Index + g.Length);
+                updated = true;
             }
-            else
-            {
-                string newVersion = assemblyVersionUpdateRule.Update(v);
-                return line.Substring(0, g.Index) + newVersion + line.Substring(g.Index + g.Length);
-            }
+            return updated;
         }
 
-        // currently just works on AssemblyVersion
-        // AssemblyFileVersion
-        // AssemblyInformationalVersion
         public static Group GetVersionString(string input, string attributeName)
         {
             var commentIndex = input.IndexOf("//");
